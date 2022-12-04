@@ -18,7 +18,9 @@ def title_screen_options():
     if opt1 == '1':
         character_create()
     elif opt1 == '2':
-        print("no")
+        exit()
+    elif opt1 == '0':
+        exit()
 
 def character_create():
     name = input("Enter your name  : ")
@@ -45,7 +47,7 @@ def character_create():
     elif app_opt == '4':
         appearence = "bald"
 
-    print('You are ' + name + ', the ' + appearence + ' ' + roll + '. You wield a ' + weapon + '.\n You enter a dungeon.')
+    print('You are ' + name + ', the ' + appearence + ' ' + roll + '. You wield a ' + weapon + '.\nYou enter a dungeon.')
 
 # Här kan vi möjligtvis lägga in ett simpelt stridssystem där användaren direkt möter ett monster när hen går in i dungeonen.
 
