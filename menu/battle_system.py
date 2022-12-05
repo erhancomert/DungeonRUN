@@ -47,9 +47,9 @@ def battle():
                     pass
         elif hp == 0 and ehp == 0:
             print("Draw")
-            pass
+            exit()
         elif hp < 0 or hp == 0:
             print("You lose")
-            pass
+            exit()
 item_pouch()
 battle()
