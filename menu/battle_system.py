@@ -1,5 +1,8 @@
 import random # Gör så att vi kan implementera slumpen i striderna.  
 
+def item_pouch():
+    item_pouch.gold = 0
+
 def battle():
     hp = 10
     ehp = random.randint(5,20) # Skriptet väljer en slumpvald siffra, till exempel från 5 till 20. 
@@ -29,12 +32,24 @@ def battle():
 
         if ehp < 0 or ehp == 0:
             print("You won!")
-            exit()
+            hp = (hp+edmg)
+            item_pouch.gold += random.randint(1,20)
+            print(f"You got {item_pouch.gold} gold coins!")
+            if item_pouch.gold == 10 or item_pouch.gold > 10:
+                print(f"Total hp:{hp}")
+                print("Restore 15 hp for 10 gold coins?\n(1) Yes.\n(2) No.")
+                action = int(input("Choose(1-2): "))
+                if action == 1:
+                    item_pouch.gold -= 10
+                    hp += 15
+                    print(f"You restored 15 hp and have {item_pouch.gold} gold coins left!")
+                elif action == 2:
+                    pass
         elif hp == 0 and ehp == 0:
             print("Draw")
-            exit()
+            pass
         elif hp < 0 or hp == 0:
             print("You lose")
-            exit()
-
+            pass
+item_pouch()
 battle()
