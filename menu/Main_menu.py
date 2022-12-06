@@ -1,3 +1,5 @@
+import json
+
 def title_screen_print():
     print("")
     print("#########################################")
@@ -16,15 +18,28 @@ def title_screen_print():
 def title_screen_options():
     opt1 = input("Enter your option   : ")
     if opt1 == '1':
-        character_create()
+        name_check()
     elif opt1 == '2':
         exit()
     elif opt1 == '0':
         exit()
 
-def character_create():
+def name_check():
+    global name
+
     name = input("Enter your name  : ")
-    
+    with open('file.json') as user_file:
+        file_contents = user_file.read() # Läser in json filen till skriptets minne. 
+        print(file_contents)
+    while name in file_contents: # Loopar tills spelaren har skrivit in ett unikt namn.
+        print("That name is all ready taken!")
+        name = input("Enter your name  : ")
+    else:
+        character_create()
+
+def character_create():
+    global name # För att använda oss av variabeln i name_check funktionen. Inte det snyggaste men funkar...
+
     print('What is your roll?\n 1. Knight \n 2. Mage')
     roll_opt = input(": ")
     if roll_opt == '1':
@@ -46,6 +61,20 @@ def character_create():
         appearence = "ragged"
     elif app_opt == '4':
         appearence = "bald"
+
+# Sparar spelarens val (namn, utseende och roll) till en json-fil.
+    fname = "file.json"
+    player_stats = [{
+        "name": name,
+        "apperance": appearence,
+        "roll": roll
+    }]
+    with open(fname) as feedsjson:
+        feeds = json.load(feedsjson)
+
+    feeds.append(player_stats)
+    with open(fname, mode='w') as f:
+        f.write(json.dumps(feeds))
 
     print('You are ' + name + ', the ' + appearence + ' ' + roll + '. You wield a ' + weapon + '.\nYou enter a dungeon.')
 
