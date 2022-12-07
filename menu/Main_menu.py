@@ -64,11 +64,11 @@ def character_create():
 
 # Sparar spelarens val (namn, utseende och roll) till en json-fil.
     fname = "file.json"
-    player_stats = [{
+    player_stats = {
         "name": name,
         "apperance": appearence,
         "roll": roll
-    }]
+    }
     with open(fname) as feedsjson:
         feeds = json.load(feedsjson)
 
