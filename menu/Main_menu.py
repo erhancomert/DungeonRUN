@@ -27,13 +27,14 @@ def title_screen_options():
 def name_check():
     global name
 
-    name = input("Enter your name  : ")
     with open('file.json') as user_file:
         file_contents = user_file.read() # Läser in json filen till skriptets minne. 
-        print(file_contents)
+    print(file_contents)
+    
+    name = input("Enter your unique name  : ")
     while name in file_contents: # Loopar tills spelaren har skrivit in ett unikt namn.
         print("That name is all ready taken!")
-        name = input("Enter your name  : ")
+        name = input("Enter your unique name  : ")
     else:
         character_create()
 
