@@ -4,15 +4,26 @@ def item_pouch():
     item_pouch.gold = 0
 
 def battle():
-    hp = 10
-    ehp = random.randint(5,20) # Skriptet väljer en slumpvald siffra, till exempel från 5 till 20. 
-    dmg = random.randint(0,20)
-    edmg = random.randint(0,20)
-    while ehp > 0:
+    hp = 20
+    dmg = random.randint(5,20)  # Skriptet väljer en slumpvald siffra, till exempel från 5 till 20. 
+
+    monsters = ["Skeleton", "Troll"]
+    mon_print = random.choice(monsters)
+    if mon_print == "Skeleton":
+        ehp = 12
+        edmg = random.randint(3,10)
+    elif mon_print == "Troll":
+        ehp = 15
+        edmg = random.randint(4,14)
+
+    print(f"You've encountred a {mon_print}!")
+    while ehp > 0:    
         print("")
         print(f"Your HP: {hp}")
-        print(f"Enemy HP: {ehp}")
+        print(f"{mon_print} HP: {ehp}")
+        print("")
         print("(1)Attack\n(2)Defend")
+        print("")
         actions = int(input("Choose your action: "))
         actionsai = 1,2
         aiactions = random.choice(actionsai)
@@ -25,12 +36,13 @@ def battle():
             print("You blocked the attack!")
 
         elif actions == 1 and aiactions == 2:
-            print("The ai blocked the attack.")
+            print("The enemy blocked the attack.")
 
         elif actions == 2 and actionsai == 2:
-            print("You both blocked.")
+            print("You enemy blocked.")
 
         if ehp < 0 or ehp == 0:
+            print("")
             print("You won!")
             hp = (hp+edmg)
             item_pouch.gold += random.randint(1,20)
